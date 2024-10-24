@@ -10,6 +10,8 @@ import MuiAlert from "@mui/material/Alert";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -26,7 +28,7 @@ const EditStudent = () => {
     const fetchStudent = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/students/${studentId}`
+          `${apiUrl}/students/${studentId}`
         );
         setStudent(response.data);
       } catch (err) {
@@ -43,7 +45,7 @@ const EditStudent = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://127.0.0.1:5000/update_student/${studentId}`,
+        `${apiUrl}/update_student/${studentId}`,
         student
       );
       setSnackbarMessage(response.data.message);

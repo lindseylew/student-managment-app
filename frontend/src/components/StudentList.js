@@ -17,6 +17,8 @@ import {
 import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -33,7 +35,7 @@ const StudentList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/students");
+        const response = await axios.get(`${apiUrl}/students`);
         if (response.data.length === 0) {
           setSnackbarMessage("No students found.");
           setSnackbarOpen(true);
@@ -69,7 +71,7 @@ const StudentList = () => {
   const deleteStudent = async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:5000/delete_student/${studentToDelete}`
+        `${apiUrl}/delete_student/${studentToDelete}`
       );
       if (response.status === 200) {
         setSnackbarMessage(response.data.message);

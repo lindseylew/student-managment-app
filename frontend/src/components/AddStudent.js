@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from'axios';
 import { TextField, Button, Box, Typography } from "@mui/material";
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 const AddStudent = () => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -45,7 +47,7 @@ const AddStudent = () => {
 
     if (validateForm()) {
     try {
-      const response = await axios.post("http://127.0.0.1:5000/add_student", {
+      const response = await axios.post(`${apiUrl}/add_student`, {
         name,
         age,
         email,
